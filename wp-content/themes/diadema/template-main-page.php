@@ -489,7 +489,30 @@ get_header();
                 <div class="modal-body info-modal">
                     <?php echo $content_block_d['text_c_block_d_main_page']; ?>
                     <div class="btn-mod">
-                        <button type="button" class="close" data-dismiss="modal">ЗАКАЗАТЬ ТО</button>
+                        <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#services-form">ЗАКАЗАТЬ ТО</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="services-form">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-transparent">
+                <div class="modal-header form-modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <img src="/wp-content/themes/diadema/images/close-button.svg">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form form-static">
+                        <?php
+                            $callback_block_d_main_page = $content_block_d['callback_block_d_main_page'];
+                           
+                            if($callback_block_d_main_page){
+                                echo do_shortcode('[contact-form-7 id=" ' . $callback_block_d_main_page . ' "]'); 
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -632,7 +655,30 @@ get_header();
                 <div class="modal-body info-modal">
                     <?php echo $content_block_f['text_f_block_f_main_page']; ?>
                     <div class="btn-mod">
-                        <button type="button" class="close" data-dismiss="modal">ЗАКАЗАТЬ ТО</button>
+                        <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#details-form">ЗАКАЗАТЬ ТО</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="details-form">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-transparent">
+                <div class="modal-header form-modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <img src="/wp-content/themes/diadema/images/close-button.svg">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form form-static">
+                        <?php
+                            $сallback_b_block_f_main_page = $content_block_f['сallback_b_block_f_main_page'];
+                            
+                            if($сallback_b_block_f_main_page){
+                                echo do_shortcode('[contact-form-7 id=" ' . $сallback_b_block_f_main_page . ' "]'); 
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
