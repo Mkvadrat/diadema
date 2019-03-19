@@ -1,0 +1,10 @@
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="51"
+                             height="51" viewBox="0 0 51 51">
+                            <defs>
+                                <pattern id="pattern" preserveAspectRatio="xMidYMid slice" width="100%" height="100%"
+                                         viewBox="0 0 384 384">
+                                    <image width="384" height="384" xlink:href="images/VKlogo-image.png"/>
+                                </pattern>
+                            </defs>
+                            <path id="VKlogo.svg" data-name="VKlogo.svg" d="M0,0H51V51H0Z" fill="url(#pattern)"/>
+                        </svg>
