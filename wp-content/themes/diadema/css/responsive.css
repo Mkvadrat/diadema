@@ -76,10 +76,13 @@
     }
 
     .know-block-dog {
-        padding: 52px 10px 54px 67px;
+        padding: 35px 50px 70px 35px;
         background-size: 94%;
     }
 
+    .section-services {
+        background-size: 37vw;
+    }
 
 }
 

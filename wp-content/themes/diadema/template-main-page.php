@@ -79,10 +79,10 @@ get_header();
         <div class="mounting-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-12 col-xl-10">
                         <div class="title"><?php echo $content_block_b['main_title_block_b_main_page']; ?></div>
                         <div class="row">
-                            <a href="#" class="col-4" data-toggle="modal" data-target="#block-b-1-form">
+                            <a href="#" class="col-12 col-sm-6 col-md-4" data-toggle="modal" data-target="#block-b-1-form">
                                 <div class="mounting-item">
                                     <div class="mounting-img">
                                         <img src="<?php echo $content_block_b['image_a_block_b_main_page']['url']; ?>" alt="<?php echo $content_block_b['image_a_block_b_main_page']['alt']; ?>">
@@ -90,7 +90,7 @@ get_header();
                                     <div class="mounting-title"><?php echo $content_block_b['text_a_block_b_main_page']; ?></div>
                                 </div>
                             </a>
-                            <a href="#" class="col-4" data-toggle="modal" data-target="#block-b-2-form">
+                            <a href="#" class="col-12 col-sm-6 col-md-4" data-toggle="modal" data-target="#block-b-2-form">
                                 <div class="mounting-item">
                                     <div class="mounting-img">
                                         <img src="<?php echo $content_block_b['image_b_block_b_main_page']['url']; ?>" alt="<?php echo $content_block_b['image_b_block_b_main_page']['alt']; ?>">
@@ -98,7 +98,7 @@ get_header();
                                     <div class="mounting-title"><?php echo $content_block_b['text_b_block_b_main_page']; ?></div>
                                 </div>
                             </a>
-                            <a href="#" class="col-4" data-toggle="modal" data-target="#block-b-3-form">
+                            <a href="#" class="col-12 col-sm-6 col-md-4" data-toggle="modal" data-target="#block-b-3-form">
                                 <div class="mounting-item">
                                     <div class="mounting-img">
                                         <img src="<?php echo $content_block_b['image_c_block_b_main_page']['url']; ?>" alt="<?php echo $content_block_b['image_c_block_b_main_page']['alt']; ?>">
@@ -106,7 +106,7 @@ get_header();
                                     <div class="mounting-title"><?php echo $content_block_b['text_c_block_b_main_page']; ?></div>
                                 </div>
                             </a>
-                            <a href="#" class="col-4" data-toggle="modal" data-target="#block-b-4-form">
+                            <a href="#" class="col-12 col-sm-6 col-md-4" data-toggle="modal" data-target="#block-b-4-form">
                                 <div class="mounting-item">
                                     <div class="mounting-img">
                                         <img src="<?php echo $content_block_b['image_d_block_b_main_page']['url']; ?>" alt="<?php echo $content_block_b['image_d_block_b_main_page']['alt']; ?>">
@@ -114,7 +114,7 @@ get_header();
                                     <div class="mounting-title"><?php echo $content_block_b['text_d_block_b_main_page']; ?></div>
                                 </div>
                             </a>
-                            <a href="#" class="col-4" data-toggle="modal" data-target="#block-b-5-form">
+                            <a href="#" class="col-12 col-sm-6 col-md-4" data-toggle="modal" data-target="#block-b-5-form">
                                 <div class="mounting-item">
                                     <div class="mounting-img">
                                         <img src="<?php echo $content_block_b['image_e_block_b_main_page']['url']; ?>" alt="<?php echo $content_block_b['image_e_block_b_main_page']['alt']; ?>">
@@ -136,10 +136,10 @@ get_header();
             <div class="container">
                 <div class="row">
                     <div class="title col-12"><?php echo $content_block_c['main_title_block_c_main_page']; ?></div>
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <?php echo $content_block_c['mark_text_a_main_title_block_c_main_page']; ?>
                     </div>
-                    <div class="col-5">
+                    <div class="col-12 col-md-6 col-lg-5">
                         <?php echo $content_block_c['mark_text_b_main_title_block_c_main_page']; ?>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ get_header();
     <div class="section-recall">
         <div class="container h-100">
             <div class="row h-100">
-                <div class="col-9 h-100">
+                <div class="col-12 col-xl-9 h-100">
                     <div class="form-recall h-100">
                         <?php
                             $callback_block_c_main_page = $content_block_c['callback_block_c_main_page'];
@@ -169,10 +169,10 @@ get_header();
     <div class="section-services">
         <div class="container">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-xl-6">
                     <?php echo $content_block_d['text_a_block_d_main_page']; ?>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-xl-6">
                     <div class="know-block-dog">
                         <?php echo $content_block_d['text_b_block_d_main_page']; ?>
                     </div>
@@ -188,7 +188,7 @@ get_header();
                 <div class="col-12"><h2><?php echo $content_block_e['main_title_block_e_main_page']; ?></h2></div>
                 <div class="col-12"><h3><?php echo $content_block_e['main_sub_title_block_e_main_page']; ?></h3></div>
                 <div class="row price-grid">
-                    <div class="col-3">
+                    <div class="col-12 col-sm-6 col-xl-3">
                         <div class="price-item">
                             <div class="price-img">
                                 <img src="<?php echo $content_block_e['image_a_block_e_main_page']['url']; ?>" alt="<?php echo $content_block_e['image_a_block_e_main_page']['alt']; ?>">
@@ -198,7 +198,7 @@ get_header();
                             <a href="#" class="btn-price" data-toggle="modal" data-target="#block-e-1-form">ЗАКАЗАТЬ</a>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-sm-6 col-xl-3">
                         <div class="price-item">
                             <div class="price-img">
                                 <img src="<?php echo $content_block_e['image_b_block_e_main_page']['url']; ?>" alt="<?php echo $content_block_e['image_b_block_e_main_page']['alt']; ?>">
@@ -208,7 +208,7 @@ get_header();
                             <a href="#" class="btn-price" data-toggle="modal" data-target="#block-e-2-form">ЗАКАЗАТЬ</a>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-sm-6 col-xl-3">
                         <div class="price-item">
                             <div class="price-img">
                                 <img src="<?php echo $content_block_e['image_c_block_e_main_page']['url']; ?>" alt="<?php echo $content_block_e['image_c_block_e_main_page']['alt']; ?>">
@@ -218,7 +218,7 @@ get_header();
                             <a href="#" class="btn-price" data-toggle="modal" data-target="#block-e-3-form">ЗАКАЗАТЬ</a>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-sm-6 col-xl-3">
                         <div class="price-item">
                             <div class="price-img">
                                 <img src="<?php echo $content_block_e['image_d_block_e_main_page']['url']; ?>" alt="<?php echo $content_block_e['image_d_block_e_main_page']['alt']; ?>">
@@ -240,14 +240,14 @@ get_header();
                 <div class="col-12">
                     <h3><?php echo $content_block_f['main_title_block_f_main_page']; ?></h3>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-xl-6">
                     <?php echo $content_block_f['text_a_block_f_main_page']; ?>
                     <div class="sertificat-block">
                         <?php echo $content_block_f['text_b_block_f_main_page']; ?>
                     </div>
                     <?php echo $content_block_f['text_c_block_f_main_page']; ?>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-xl-6">
                     <?php echo $content_block_f['text_d_block_f_main_page']; ?>
                     <div class="know-block">
                         <?php echo $content_block_f['text_e_block_f_main_page']; ?>
@@ -265,19 +265,19 @@ get_header();
                 <div class="col-12">
                     <?php echo $content_block_g['text_a_block_g_main_page']; ?>
                 </div>
-                <a href="#" class="col-4" data-toggle="modal" data-target="#object-1">
+                <a href="#" class="col-12 col-md-6 col-xl-4" data-toggle="modal" data-target="#object-1">
                     <div class="object-grid">
                         <div class="object-img" style="background-image: url('<?php echo $content_block_g['image_a_block_g_main_page']['url']; ?>')"></div>
                         <div class="object-title"><?php echo $content_block_g['title_a_block_g_main_page']; ?></div>
                     </div>
                 </a>
-                <a href="#" class="col-4" data-toggle="modal" data-target="#object-2">
+                <a href="#" class="col-12 col-md-6 col-xl-4" data-toggle="modal" data-target="#object-2">
                     <div class="object-grid">
                         <div class="object-img" style="background-image: url('<?php echo $content_block_g['image_b_block_g_main_page']['url']; ?>')"></div>
                         <div class="object-title"><?php echo $content_block_g['title_b_block_g_main_page']; ?></div>
                     </div>
                 </a>
-                <a href="#" class="col-4" data-toggle="modal" data-target="#object-3">
+                <a href="#" class="col-12 col-md-6 col-xl-4" data-toggle="modal" data-target="#object-3">
                     <div class="object-grid">
                         <div class="object-img" style="background-image: url('<?php echo $content_block_g['image_c_block_g_main_page']['url']; ?>')"></div>
                         <div class="object-title"><?php echo $content_block_g['title_c_block_g_main_page']; ?></div>
@@ -291,7 +291,7 @@ get_header();
     <div class="section-contacts">
         <div class="container">
             <div class="row">
-                <div class="col-7">
+                <div class="col-12 col-lg-7">
                     <div class="contacts">
                         <div class="title"><?php echo $content_block_h['main_title_block_h_main_page']; ?></div>
                         <div class="contacts-item">
@@ -318,7 +318,7 @@ get_header();
                         </div>
                     </div>
                 </div>
-                <div class="col-5">
+                <div class="col-12 col-lg-5">
                     <div class="form form-static">
                         <?php
                             $сallback_a_block_h_main_page = $content_block_h['сallback_a_block_h_main_page'];

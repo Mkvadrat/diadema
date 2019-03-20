@@ -12,12 +12,12 @@ Version: 1.0
  <footer>
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <div class="soc-footer">
                     <?php echo get_field('soc_links_footer_main_page', 10); ?>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <div class="made-by">
                     <?php echo get_field('wrapper_footer_main_page', 10); ?>
                 </div>
@@ -31,8 +31,10 @@ Version: 1.0
         $('.owl-carousel').owlCarousel({
             items: 1,
             nav: true,
-            navText: ["<img src='/wp-content/themes/diadema/images/Arrowleft.svg'>", "<img src='/wp-content/themes/diadema/images/ArrowRight.svg'>"],
-            dots: true
+            navText: ["<img src='/wp-content/themes/diadema/images/ArrowLeft.svg'>", "<img src='/wp-content/themes/diadema/images/ArrowRight.svg'>"],
+            dots: true,
+            loop: true,
+            autoplay: true
         });
     });
 </script>

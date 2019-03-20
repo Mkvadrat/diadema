@@ -30,6 +30,7 @@ Version: 1.0
     <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/style.css">
+    <link rel="stylesheet" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/responsive.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="<?php echo esc_url(get_template_directory_uri()); ?>/js/bootstrap.bundle.min.js"></script>
@@ -41,7 +42,7 @@ Version: 1.0
 <header>
     <div class="container">
         <div class="row">
-            <div class="col-3 logo">
+            <div class="col-12 col-sm-6 col-lg-3 logo">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
                     <img
                         src="<?php header_image(); ?>"
@@ -51,17 +52,17 @@ Version: 1.0
                     />
                 </a>
             </div>
-            <div class="col-3">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <div class="address">
                     <?php echo get_field('address_header_main_page', 10); ?>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <div class="phones">
                     <?php echo get_field('phones_header_main_page', 10); ?>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <a href="#" title="ЗАКАЗАТЬ" class="btn-order" data-toggle="modal" data-target="#header-form">ЗАКАЗАТЬ</a>
             </div>
             <div class="popover-custom">
