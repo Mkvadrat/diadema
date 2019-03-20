@@ -23,7 +23,7 @@ class M_Gallery_Display extends C_Base_Module
 			'photocrati-nextgen_gallery_display',
 			'Gallery Display',
 			'Provides the ability to display gallery of images',
-			'3.1.4.2',
+			'3.1.8',
 			'https://www.imagely.com/wordpress-gallery-plugin/nextgen-gallery/',
       'Imagely',
       'https://www.imagely.com'
@@ -530,9 +530,6 @@ class C_Display_Type_Installer
 		$properties['name'] = $name;
 		$properties['installed_at_version'] = NGG_PLUGIN_VERSION;
 		foreach ($properties as $key=>$val) {
-			if ($key == 'preview_image_relpath') {
-				$val = $fs->find_static_abspath($val, FALSE, TRUE);
-			}
 			$display_type->$key = $val;
 		}
 
