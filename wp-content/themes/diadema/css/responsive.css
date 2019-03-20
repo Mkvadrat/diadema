@@ -236,6 +236,13 @@
         padding-bottom: 30px;
     }
 
+    .contacts-item {
+        flex-wrap: wrap;
+    }
+
+    .contacts-name {
+        width: 100%;
+    }
 
 }
 
