@@ -496,6 +496,7 @@ header .row {
     align-items: stretch;
     padding-top: 75px;
     width: 100%;
+    margin: 0;
 }
 
 .price-img {
@@ -1063,16 +1064,25 @@ textarea.form-input {
     border-color: rgba(255, 255, 255, 1);
 }
 
-.dropdown-toggle::after {
+form .dropdown .wpcf7-form-control-wrap {
+    height: 65px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.dropdown-toggle::after, form .dropdown .wpcf7-form-control-wrap::after {
+    content: '';
     border: none;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1px;
+    right: 1px;
     width: 68px;
-    height: 65px;
+    height: 63px;
+    border-radius: 0 4px 4px 0;
     border-left: 1px solid rgba(255, 255, 255, .5);
-    background: url(../images/drop-arrow.png) no-repeat center center;
+    background: #191b29 url(../images/drop-arrow.png) no-repeat center center;
     background-size: 25%;
+    pointer-events: none;
 }
 
 .dropdown-toggle:hover::after {
@@ -1175,6 +1185,51 @@ textarea.form-input {
     background-size: 5%;
 }
 
+.section-404 {
+    background: #ffd800;
+    min-height: 48.5vw;
+    display: flex;
+    align-items: center;
+}
+
+.section-404 a {
+    padding: 5px 33px;
+    width: auto;
+    height: 65px;
+    background: #191b29;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 48px;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.section-404 a:hover {
+    background: #1382bb;
+    color: #fff;
+    box-shadow: 0 3px 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.15s;
+}
+
+.section-404 h1 {
+    font-size: 5.6vw;
+    margin-bottom: 20px;
+}
+
+.section-404 h3 {
+    font-size: 1.85vw;
+    margin-bottom: 40px;
+}
+
+form .dropdown option {
+    background: #191b29;
+    color: rgba(255, 255, 255, .5);
+}
 
 @media (min-width: 1921px) {
     .mounting-middle {
