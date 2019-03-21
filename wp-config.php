@@ -26,7 +26,7 @@ define( 'DB_NAME', 'mkvadrat_diadema' );
 define( 'DB_USER', 'mkvadrat_diadema' );
 
 /** Пароль к базе данных MySQL */
-define( 'DB_PASSWORD', 't3jcCve6' );
+define( 'DB_PASSWORD', 'rSDENQm1' );
 
 /** Имя сервера MySQL */
 define( 'DB_HOST', 'localhost' );
