@@ -361,6 +361,53 @@ get_header();
         </div>
     </div>
     
+    <!--Banner form-->
+    <div class="modal" id="urgent-repairs">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-transparent">
+                <div class="modal-header form-modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <img src="/wp-content/themes/diadema/images/close-button.svg">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form form-static">
+                        <?php
+                            $banner_cf_a_content_main_page = get_field('banner_cf_a_content_main_page', 10);
+                           
+                            if($banner_cf_a_content_main_page){
+                                echo do_shortcode('[contact-form-7 id=" ' . $banner_cf_a_content_main_page . ' "]'); 
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="emergency-exit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-transparent">
+                <div class="modal-header form-modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <img src="/wp-content/themes/diadema/images/close-button.svg">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form form-static">
+                        <?php
+                            $banner_cf_b_content_main_page = get_field('banner_cf_b_content_main_page', 10);
+                           
+                            if($banner_cf_b_content_main_page){
+                                echo do_shortcode('[contact-form-7 id=" ' . $banner_cf_b_content_main_page . ' "]'); 
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!--block 2 form -->
     <div class="modal" id="block-b-1-form">
         <div class="modal-dialog modal-lg">
