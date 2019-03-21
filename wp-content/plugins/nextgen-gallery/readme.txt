@@ -2,11 +2,11 @@
 Contributors: photocrati, imagely
 Tags: wordpress gallery plugin, gallery, nextgen, nextgen gallery, photo gallery, image gallery, photography, slideshow, images, photo, photo album, watermark
 Requires at least: 4.0.0
-Stable tag: 3.1.11
-Tested up to: 5.1.1
+Stable tag: 3.1.6
+Tested up to: 5.0.2
 License: GPLv2
 
-The most popular WordPress gallery plugin and one of the most popular plugins of all time with over 25 million downloads.
+The most popular WordPress gallery plugin and one of the most popular plugins of all time with over 24 million downloads.
 
 == Description ==
 
@@ -182,17 +182,6 @@ For more information, feel free to visit the official website for the NextGEN Ga
 
 
 == Changelog ==
-
-= V3.1.11 - 03.020.2019 =
-* NEW:     Many performance enhancements
-* Fixed:   Broken Overview page on WordPress 5.1
-* Fixed:   Problem with notices not being dismissible
-* Fixed:   Recover images from backup generating errors
-* Fixed:   Manage Tags the only menu option after activating
-* Fixed:   Compatibility with environments which don't have mime_content_type function
-
-= V3.1.7 - 02.26.2019 =
-* Changed: Upgraded Freemius SDK to latest release
 
 = V3.1.6 - 01.16.2019 =
 * NEW:     Option to control caching duration of random widget galleries

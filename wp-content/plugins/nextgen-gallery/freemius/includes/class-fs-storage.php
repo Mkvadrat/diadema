@@ -132,8 +132,9 @@
          * @param int $blog_id
          */
         function set_site_blog_context( $blog_id ) {
-            $this->_storage = $this->get_site_storage( $blog_id );
             $this->_blog_id = $blog_id;
+
+            $this->_storage = $this->get_site_storage( $this->_blog_id );
         }
 
         /**
@@ -373,7 +374,6 @@
                 // When network activated, then network level.
                 'install_timestamp'          => 1,
                 'prev_is_premium'            => 1,
-                'require_license_activation' => 1,
 
                 // If not network activated OR delegated, then site level.
                 'activation_timestamp'       => 2,

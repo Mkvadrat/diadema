@@ -3,8 +3,8 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You 
 
 /**
  * Plugin Name: NextGEN Gallery
- * Description: The most popular gallery plugin for WordPress and one of the most popular plugins of all time with over 25 million downloads.
- * Version: 3.1.11
+ * Description: The most popular gallery plugin for WordPress and one of the most popular plugins of all time with over 24 million downloads.
+ * Version: 3.1.6
  * Author: Imagely
  * Plugin URI: https://www.imagely.com/wordpress-gallery-plugin/nextgen-gallery/
  * Author URI: https://www.imagely.com
@@ -391,9 +391,8 @@ class C_NextGEN_Bootstrap
 	 */
 	function _register_hooks()
 	{
-		// Register the (de)activation routines
-		add_action('deactivate_' . NGG_PLUGIN_BASENAME, array(get_class(), 'deactivate'));
-        add_action('activate_'   . NGG_PLUGIN_BASENAME, array(get_class(), 'activate'), -10);
+		// Register the deactivation routines
+		add_action('deactivate_'.NGG_PLUGIN_BASENAME, array(get_class(), 'deactivate'));
 
 		// Register our test suite
 		add_filter('simpletest_suites', array(&$this, 'add_testsuite'));
@@ -655,42 +654,12 @@ class C_NextGEN_Bootstrap
 	/**
 	 * Run the uninstaller
 	 */
-	public static function deactivate()
+	static function deactivate()
 	{
         include_once('products/photocrati_nextgen/class.nextgen_product_installer.php');
         C_Photocrati_Installer::add_handler(NGG_PLUGIN_BASENAME, 'C_NextGen_Product_Installer');
 		C_Photocrati_Installer::uninstall(NGG_PLUGIN_BASENAME);
 	}
-
-	public static function activate()
-    {
-        // Set the capabilities for the administrator
-        $role = get_role('administrator');
-
-        // We need this role, no other chance
-        if (empty($role))
-        {
-            update_option("ngg_init_check", __('Sorry, NextGEN Gallery works only with a role called administrator',"nggallery"));
-            return;
-        }
-
-        $capabilities = array(
-            'NextGEN Attach Interface',
-            'NextGEN Change options',
-            'NextGEN Change style',
-            'NextGEN Edit album',
-            'NextGEN Gallery overview',
-            'NextGEN Manage gallery',
-            'NextGEN Manage others gallery',
-            'NextGEN Manage tags',
-            'NextGEN Upload images',
-            'NextGEN Use TinyMCE'
-        );
-
-        foreach ($capabilities as $capability) {
-            $role->add_cap($capability);
-        }
-    }
 
 	/**
 	 * Defines necessary plugins for the plugin to load correctly
@@ -699,7 +668,7 @@ class C_NextGEN_Bootstrap
 	{
 		define('NGG_PLUGIN', basename($this->directory_path()));
 		define('NGG_PLUGIN_BASENAME', plugin_basename(__FILE__));
-		define('NGG_PLUGIN_DIR', plugin_dir_path(__FILE__));
+		define('NGG_PLUGIN_DIR', $this->directory_path());
 		define('NGG_PLUGIN_URL', $this->path_uri());
 		define('NGG_TESTS_DIR',   implode(DIRECTORY_SEPARATOR, array(rtrim(NGG_PLUGIN_DIR, "/\\"), 'tests')));
 		define('NGG_PRODUCT_DIR', implode(DIRECTORY_SEPARATOR, array(rtrim(NGG_PLUGIN_DIR, "/\\"), 'products')));
@@ -707,14 +676,12 @@ class C_NextGEN_Bootstrap
 		define('NGG_PRODUCT_URL', path_join(str_replace("\\" , '/', NGG_PLUGIN_URL), 'products'));
 		define('NGG_MODULE_URL', path_join(str_replace("\\", '/', NGG_PRODUCT_URL), 'photocrati_nextgen/modules'));
 		define('NGG_PLUGIN_STARTED_AT', microtime());
-		define('NGG_PLUGIN_VERSION', '3.1.11');
+		define('NGG_PLUGIN_VERSION', '3.1.6');
 
-		define(
-			'NGG_SCRIPT_VERSION',
-			defined('SCRIPT_DEBUG') && SCRIPT_DEBUG
-				? (string)mt_rand(0, mt_getrandmax())
-				: NGG_PLUGIN_VERSION
-		);
+		if (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG)
+			define('NGG_SCRIPT_VERSION', (string)mt_rand(0, mt_getrandmax()));
+		else
+			define('NGG_SCRIPT_VERSION', NGG_PLUGIN_VERSION);
 
 		if (!defined('NGG_HIDE_STRICT_ERRORS')) {
 			define('NGG_HIDE_STRICT_ERRORS', TRUE);
@@ -771,11 +738,6 @@ class C_NextGEN_Bootstrap
 		// Use Pope's new caching mechanism?
 		if (!defined('NGG_POPE_CACHE')) {
 			define('NGG_POPE_CACHE', FALSE);
-		}
-
-		// Where are galleries restricted to?
-		if (!defined('NGG_GALLERY_ROOT_TYPE')) {
-			define('NGG_GALLERY_ROOT_TYPE', 'site'); // "content" is the other possible value
 		}
 	}
 
@@ -840,6 +802,36 @@ class C_NextGEN_Bootstrap
 	 */
 	function get_plugin_location()
 	{
+		$path = dirname(__FILE__);
+		$gallery_dir = strtolower($path);
+		$gallery_dir = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $gallery_dir);
+
+		$theme_dir = strtolower(get_stylesheet_directory());
+		$theme_dir = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $theme_dir);
+
+		$plugin_dir = strtolower(WP_PLUGIN_DIR);
+		$plugin_dir = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $plugin_dir);
+
+		$common_dir_theme = substr($gallery_dir, 0, strlen($theme_dir));
+		$common_dir_plugin = substr($gallery_dir, 0, strlen($plugin_dir));
+
+		if ($common_dir_theme == $theme_dir)
+		{
+			return 'theme';
+		}
+
+		if ($common_dir_plugin == $plugin_dir)
+		{
+			return 'plugin';
+		}
+
+		$parent_dir = dirname($path);
+
+		if (file_exists($parent_dir . DIRECTORY_SEPARATOR . 'style.css'))
+		{
+			return 'theme';
+		}
+
 		return 'plugin';
 	}
 
@@ -997,10 +989,10 @@ function ngg_fs( $activate_for_all = false ) {
 				$run_freemius = true;
 			} else {
 				// Run Freemius code on 20% of the new installations.
-				// $random = rand( 1, 10 );
-				// $run_freemius = ( 1 <= $random && $random <= 2 );
-				// Update 2016-08: run on all new instances
-				$run_freemius = true;
+			// $random = rand( 1, 10 );
+			// $run_freemius = ( 1 <= $random && $random <= 2 );
+            // Update 2016-08: run on all new instances
+            $run_freemius = TRUE;
 			}
 
 			update_option( 'ngg_run_freemius', $run_freemius );

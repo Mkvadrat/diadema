@@ -59,12 +59,19 @@ class C_Ajax_Controller extends C_MVC_Controller
         }
         return self::$_instances[$context];
     }
-    function validate_ajax_request($action = NULL, $token = false)
+    function validate_ajax_request($action = NULL, $check_token = false)
     {
-        if ($token === TRUE) {
-            $token = isset($_REQUEST['nonce']) ? $_REQUEST['nonce'] : FALSE;
+        // TODO: remove this. Pro 2.1's proofing calls validate_ajax_request() with a null $action
+        if (!$action) {
+            return TRUE;
         }
-        // TODO: Remove !$action condition. Necessary for Proofing at the moment
-        return (!$action || M_Security::is_allowed($action)) && (!$token || M_Security::verify_nonce($token, $action));
+        $valid_request = false;
+        $security = $this->get_registry()->get_utility('I_Security_Manager');
+        $sec_actor = $security->get_current_actor();
+        $sec_token = $security->get_request_token($action);
+        if ($sec_actor->is_allowed($action) && (!$check_token || $sec_token->check_current_request())) {
+            $valid_request = true;
+        }
+        return $valid_request;
     }
 }

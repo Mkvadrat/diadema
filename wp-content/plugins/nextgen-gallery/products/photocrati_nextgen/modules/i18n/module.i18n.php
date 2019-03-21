@@ -20,7 +20,7 @@ class M_I18N extends C_Base_Module
             'photocrati-i18n',
             'Internationalization',
             "Adds I18N resources and methods",
-            '3.1.8',
+            '3.1.6',
             'https://www.imagely.com/languages/',
             'Imagely',
             'https://www.imagely.com'
@@ -47,10 +47,11 @@ class M_I18N extends C_Base_Module
 
     function register_translation_hooks()
     {
+        $fs = C_Fs::get_instance();
         $dir = str_replace(
-        	wp_normalize_path(WP_CONTENT_DIR),
-        	"",
-        	M_Static_Assets::get_static_abspath('photocrati-i18n#lang')
+            $fs->get_document_root('plugins'),
+            '',
+            $fs->get_abspath('lang', 'photocrati-i18n')
         );
 
         // Load text domain

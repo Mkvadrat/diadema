@@ -1,17 +1,6 @@
 NextGEN Gallery
 by Imagely
 
-= V3.1.11 - 03.020.2019 =
-* NEW:     Many performance enhancements
-* Fixed:   Broken Overview page on WordPress 5.1
-* Fixed:   Problem with notices not being dismissible
-* Fixed:   Recover images from backup generating errors
-* Fixed:   Manage Tags the only menu option after activating
-* Fixed:   Compatibility with environments which don't have mime_content_type function
-
-= V3.1.7 - 02.26.2019 =
-* Changed: Upgraded Freemius SDK to latest release
-
 = V3.1.6 - 01.16.2019 =
 * NEW:     Option to control caching duration of random widget galleries
 * Secured: DB record serialization

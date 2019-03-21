@@ -113,7 +113,6 @@
             if (optionName) {
                 $.post(ajaxurl, {
                     action     : 'fs_get_db_option',
-                    _wpnonce   : '<?php echo wp_create_nonce( 'fs_get_db_option' ) ?>',
                     option_name: optionName
                 }, function (response) {
                     if (response.data.value)
@@ -133,7 +132,6 @@
                 if (optionValue) {
                     $.post(ajaxurl, {
                         action      : 'fs_set_db_option',
-                        _wpnonce   : '<?php echo wp_create_nonce( 'fs_set_db_option' ) ?>',
                         option_name : optionName,
                         option_value: optionValue
                     }, function () {
@@ -207,7 +205,7 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach ( $fs_active_plugins->plugins as $sdk_path => $data ) : ?>
+    <?php foreach ( $fs_active_plugins->plugins as $sdk_path => &$data ) : ?>
         <?php $is_active = ( WP_FS__SDK_VERSION == $data->version ) ?>
         <tr<?php if ( $is_active ) {
             echo ' style="background: #E6FFE6; font-weight: bold"';
@@ -319,7 +317,7 @@
                                     <input type="hidden" name="module_id" value="<?php echo $fs->get_id() ?>">
                                     <?php wp_nonce_field( 'simulate_trial' ) ?>
 
-                                    <button type="submit" class="button button-primary simulate-trial"><?php fs_esc_html_echo_inline( 'Simulate Trial Promotion' ) ?></button>
+                                    <button type="submit" class="button button-primary simulate-trial"><?php fs_esc_html_echo_inline( 'Simulate Trial' ) ?></button>
                                 </form>
                             <?php endif ?>
                             <?php if ( $fs->is_registered() ) : ?>

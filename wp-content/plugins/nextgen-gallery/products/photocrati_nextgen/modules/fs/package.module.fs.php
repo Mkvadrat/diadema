@@ -47,11 +47,41 @@ class Mixin_Fs_Instance_Methods extends Mixin
      * Returns a calculated path to a file
      * @param string $path
      * @param string|false $module (optional)
+     * @param bool $relpath (optional)
      * @return string
      */
-    function get_abspath($path, $module = FALSE)
+    function get_abspath($path, $module = FALSE, $relpath = FALSE)
     {
-        return M_Static_Assets::get_static_abspath($path, $module);
+        // Wel'l assume that we're to calculate the path relative to
+        // the site document root
+        $retval = $path;
+        if (strpos($path, $this->get_document_root()) === FALSE) {
+            $retval = $this->join_paths($this->get_document_root(), $path);
+        }
+        // If a module is provided, then we should calculate the path
+        // relative to the module directory
+        if ($module) {
+            if ($module_dir = $this->get_registry()->get_module_dir($module)) {
+                $retval = $this->join_paths($module_dir, $path);
+            } else {
+                $retval = $this->join_path($this->get_document_root(), $module, $path);
+            }
+        }
+        // Return the calculated path relative to the document root
+        if ($relpath) {
+            $retval = $this->object->remove_path_segment($retval, $this->get_document_root());
+        }
+        return $retval;
+    }
+    /**
+     * Returns a calculated relpath to a particular file
+     * @param string $path
+     * @param string|false $module (optional)
+     * @return string
+     */
+    function get_relpath($path, $module = FALSE)
+    {
+        return $this->object->get_abspath($path, $module, TRUE);
     }
     /**
      * Removes a path segment from a url or filesystem path
@@ -74,25 +104,41 @@ class Mixin_Fs_Instance_Methods extends Mixin
      * @param array $search_paths (optional)
      * @return string|NULL
      */
-    function find_abspath($path, $module = FALSE)
+    function find_abspath($path, $module = FALSE, $relpath = FALSE, $search_paths = array())
     {
-        if (strpos($path, '#') !== FALSE) {
-            $parts = explode("#", $path);
-            if (count($parts) === 2) {
-                $path = $parts[1];
-                $module = $parts[0];
-            } else {
-                $path = $parts[0];
+        $retval = NULL;
+        // Ensure that we weren't passed a module id in the path
+        if (!$module) {
+            list($path, $module) = $this->object->parse_formatted_path($path);
+        }
+        if (@file_exists($path)) {
+            $retval = $path;
+        } else {
+            // Ensure that we know where to search for the file
+            if (!$search_paths) {
+                $search_paths = $this->object->get_search_paths($path, $module);
+            }
+            // See if the file is located under one of the search paths directly
+            foreach ($search_paths as $dir) {
+                if (@file_exists($this->join_paths($dir, $path))) {
+                    $retval = $this->join_paths($dir, $path);
+                    break;
+                }
+            }
+            // Use rglob to find the file
+            if (!$retval) {
+                foreach ($search_paths as $dir) {
+                    if ($retval = $this->object->_rglob($dir, $path)) {
+                        break;
+                    }
+                }
+            }
+            // Return the relative path if we're to do so
+            if ($relpath) {
+                $retval = $this->object->remove_path_segment($retval, $this->get_document_root());
             }
         }
-        if (!$module) {
-            die(sprintf("find_abspath requires a path and module. Received %s and %s", $path, strval($module)));
-        }
-        $module_dir = C_Component_Registry::get_instance()->get_module_dir($module);
-        $path = preg_replace("#^/{1,2}#", "", $path, 1);
-        $retval = path_join($module_dir, $path);
-        // Adjust for windows paths
-        return wp_normalize_path($retval);
+        return $retval;
     }
     /**
      * Returns a list of directories to search for a particular filename
@@ -199,7 +245,6 @@ class Mixin_Fs_Instance_Methods extends Mixin
     }
     /**
      * Joins multiple path segments together
-     * @deprecated use path_join() instead when you can
      * @return string
      */
     function join_paths()
@@ -292,7 +337,7 @@ class Mixin_Fs_Instance_Methods extends Mixin
                 break;
             case 'gallery':
             case 'galleries':
-                $root_type = NGG_GALLERY_ROOT_TYPE;
+                $root_type = defined('NGG_GALLERY_ROOT_TYPE') ? NGG_GALLERY_ROOT_TYPE : 'site';
                 if ($root_type == 'content') {
                     $retval = WP_CONTENT_DIR;
                 } else {
@@ -302,10 +347,14 @@ class Mixin_Fs_Instance_Methods extends Mixin
             default:
                 $retval = $this->_document_root;
         }
-        return wp_normalize_path($retval);
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $retval = str_replace('/', DIRECTORY_SEPARATOR, $retval);
+        }
+        return $retval;
     }
     function get_absolute_path($path)
     {
+        $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
         $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
         $absolutes = array();
         foreach ($parts as $part) {
@@ -318,7 +367,7 @@ class Mixin_Fs_Instance_Methods extends Mixin
                 $absolutes[] = $part;
             }
         }
-        return wp_normalize_path(implode(DIRECTORY_SEPARATOR, $absolutes));
+        return implode(DIRECTORY_SEPARATOR, $absolutes);
     }
     /**
      * Sets the document root for this application

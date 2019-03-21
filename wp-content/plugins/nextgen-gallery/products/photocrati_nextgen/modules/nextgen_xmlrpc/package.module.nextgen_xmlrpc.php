@@ -135,6 +135,7 @@ class A_NextGen_API_Ajax extends Mixin
         $response = array();
         if ($user_obj != null && !is_a($user_obj, 'WP_Error')) {
             wp_set_current_user($user_obj->ID);
+            $security = $this->get_registry()->get_utility('I_Security_Manager');
             $app_config = $this->object->param('app_config');
             $task_list = $this->object->param('task_list');
             $extra_data = $this->object->param('extra_data');
@@ -166,7 +167,7 @@ class A_NextGen_API_Ajax extends Mixin
                     $task_auth = false;
                     switch ($task_type) {
                         case 'gallery_add':
-                            $task_auth = M_Security::is_allowed('nextgen_edit_gallery');
+                            $task_auth = $security->is_allowed('nextgen_edit_gallery');
                             break;
                         case 'gallery_remove':
                         case 'gallery_edit':
@@ -178,19 +179,20 @@ class A_NextGen_API_Ajax extends Mixin
                                 $gallery = $gallery_mapper->find($query_id);
                             }
                             if ($gallery != null) {
-                                $task_auth = wp_get_current_user()->ID == $gallery->author || M_Security::is_allowed('nextgen_edit_gallery_unowned');
+                                $actor = $security->get_current_actor();
+                                $task_auth = $actor->get_entity_id() == $gallery->author || $actor->is_allowed('nextgen_edit_gallery_unowned');
                             } else {
-                                $task_auth = M_Security::is_allowed('nextgen_edit_gallery');
+                                $task_auth = $security->is_allowed('nextgen_edit_gallery');
                             }
                             break;
                         case 'album_add':
-                            $task_auth = M_Security::is_allowed('nextgen_edit_album');
+                            $task_auth = $security->is_allowed('nextgen_edit_album');
                             break;
                         case 'album_remove':
-                            $task_auth = M_Security::is_allowed('nextgen_edit_album');
+                            $task_auth = $security->is_allowed('nextgen_edit_album');
                             break;
                         case 'album_edit':
-                            $task_auth = M_Security::is_allowed('nextgen_edit_album');
+                            $task_auth = $security->is_allowed('nextgen_edit_album');
                             break;
                         case 'image_list_move':
                             break;

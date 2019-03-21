@@ -25,13 +25,6 @@
          */
         public $slug;
         /**
-         * @author Leo Fajardo (@leorw)
-         * @since 2.2.1
-         *
-         * @var string
-         */
-        public $premium_slug;
-        /**
          * @since 1.2.2
          *
          * @var string 'plugin' or 'theme'
@@ -75,13 +68,6 @@
          */
         public $is_premium;
         /**
-         * @author Leo Fajardo (@leorw)
-         * @since 2.2.1
-         *
-         * @var string
-         */
-        public $premium_suffix;
-        /**
          * @since 1.0.9
          *
          * @var bool
@@ -100,14 +86,6 @@
 
             $this->is_premium = false;
             $this->is_live    = true;
-
-            if ( empty( $this->premium_slug ) && ! empty( $plugin->slug ) ) {
-                $this->premium_slug = "{$this->slug}-premium";
-            }
-
-            if ( empty( $this->premium_suffix ) ) {
-                $this->premium_suffix = '(Premium)';
-            }
 
             if ( isset( $plugin->info ) && is_object( $plugin->info ) ) {
                 $this->info = new FS_Plugin_Info( $plugin->info );

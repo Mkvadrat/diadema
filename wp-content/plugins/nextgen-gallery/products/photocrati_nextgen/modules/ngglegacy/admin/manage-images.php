@@ -6,8 +6,6 @@ function nggallery_picturelist($controller) {
 // *** show picture list
 	global $wpdb, $nggdb, $user_ID, $ngg;
 
-	$settings = C_NextGen_Settings::get_instance();
-
 	$action_status = array('message' => '', 'status' => 'ok');
 
 	// Look if its a search result
@@ -60,11 +58,10 @@ function nggallery_picturelist($controller) {
 		$total_number_of_images = count($image_mapper->select($image_mapper->get_primary_key_column())->
 			where(array("galleryid = %d", $act_gid))->run_query(FALSE, FALSE, TRUE));
 
-		$image_mapper->select()->where(array("galleryid = %d", $act_gid));
-		if (($galSort = $settings->get('galSort', FALSE)) && ($galSortDir = $settings->get('galSortDir', FALSE))) {
-			$image_mapper->order_by($galSort, $galSortDir);
-		}
-		$picturelist = $image_mapper->limit($items_per_page, $start)->run_query();
+		$picturelist = $image_mapper->select()->
+			where(array("galleryid = %d", $act_gid))->
+			order_by($ngg->options['galSort'], $ngg->options['galSortDir'])->
+			limit($items_per_page, $start)->run_query();
 
 		// get the current author
         $act_author_user = get_userdata((int)$gallery->author);
@@ -373,7 +370,7 @@ jQuery(document).ready( function($) {
 								<?php if ( wpmu_enable_function('wpmuImportFolder') && nggGallery::current_user_can( 'NextGEN Import image folder' ) ) : ?>
 								<input type="submit" class="button-primary" name="scanfolder" value="<?php _e("Scan Folder for new images",'nggallery'); ?> " />
 								<?php endif; ?>
-								<input type="submit" class="button-primary action ngg_save_gallery_changes" name="updatepictures" value="<?php _e("Save Changes",'nggallery'); ?>" />
+								<input type="submit" class="button-primary action" name="updatepictures" value="<?php _e("Save Changes",'nggallery'); ?>" />
 							</div>
 
 						</div>
@@ -443,7 +440,7 @@ jQuery(document).ready( function($) {
 				</select>
 				<input class="button-primary" type="submit" name="showThickbox" value="<?php _e('Apply', 'nggallery'); ?>" onclick="if ( !checkSelected() ) return false;" />
 
-				<?php if (($settings->galSort == "sortorder") && (!$is_search) ) { ?>
+				<?php if (($ngg->options['galSort'] == "sortorder") && (!$is_search) ) { ?>
 					<input class="button-primary" type="submit" name="sortGallery" value="<?php _e('Sort gallery', 'nggallery');?>" />
 				<?php } ?>
 
@@ -468,10 +465,10 @@ jQuery(document).ready( function($) {
 
 						$thumbsize 	= '';
 						$storage = C_Gallery_Storage::get_instance();
-						$gallery_mapper = C_Gallery_Mapper::get_instance();
+					    $gallery_mapper = C_Gallery_Mapper::get_instance();
 
-						if ($settings->thumbfix)
-							$thumbsize = 'width="' . $settings->thumbwidth . '" height="' . $settings->thumbheight . '"';
+						if ($ngg->options['thumbfix'])
+							$thumbsize = 'width="' . $ngg->options['thumbwidth'] . '" height="' . $ngg->options['thumbheight'] . '"';
 
 						foreach($picturelist as $picture) {
 
@@ -585,7 +582,7 @@ jQuery(document).ready( function($) {
 					<strong><?php _e('Resize Images to', 'nggallery'); ?>:</strong>
 				</td>
 				<td>
-					<input type="text" size="5" name="imgWidth" value="<?php echo $settings->imgWidth ?>" /> x <input type="text" size="5" name="imgHeight" value="<?php echo $settings->imgHeight; ?>" />
+					<input type="text" size="5" name="imgWidth" value="<?php echo $ngg->options['imgWidth']; ?>" /> x <input type="text" size="5" name="imgHeight" value="<?php echo $ngg->options['imgHeight']; ?>" />
 					<br /><small><?php _e('Width x height (in pixel). NextGEN Gallery will keep ratio size','nggallery') ?></small>
 				</td>
 			</tr>
@@ -617,7 +614,7 @@ jQuery(document).ready( function($) {
 			</tr>
 			<tr valign="top">
 				<th align="left"><?php _e('Set fix dimension','nggallery') ?></th>
-				<td><input type="checkbox" name="thumbfix" value="1" <?php checked('1', $settings->thumbfix); ?> />
+				<td><input type="checkbox" name="thumbfix" value="1" <?php checked('1', $ngg->options['thumbfix']); ?> />
 				<br /><small><?php _e('Ignore the aspect ratio, no portrait thumbnails','nggallery') ?></small></td>
 			</tr>
 		  	<tr>

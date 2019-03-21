@@ -521,10 +521,10 @@ table.nextgen_settings_position {
     color: transparent;
     content: "\2022";
     display:block;
-    height: 17px;
-    margin: -1px 0 0 -1px;
+    height: 16px;
+    margin: 0 0 0 -1px;
     vertical-align: middle;
-    width: 17px;
+    width: 16px;
 }
 
 /***** 5) NGG Admin CSS: Tables *****/

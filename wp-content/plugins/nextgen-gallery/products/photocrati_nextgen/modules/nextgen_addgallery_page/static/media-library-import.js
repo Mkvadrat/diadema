@@ -53,6 +53,10 @@
                     ngg_importml.methods.import.params.gallery_id   = ngg_importml.methods.urlencode(ngg_importml.selectors.gallery_select.val());
                     ngg_importml.methods.import.params.gallery_name = ngg_importml.methods.urlencode(ngg_importml.selectors.gallery_name.val());
 
+                    Object.keys(ngg_importml_i18n.sectoken).forEach(function(key) {
+                        ngg_importml.methods.import.params[key] = ngg_importml_i18n.sectoken[key];
+                    });
+
                     ngg_importml.progress_bar = $.nggProgressBar({
                         title: ngg_importml_i18n.progress_title,
                         infinite: true,
@@ -93,7 +97,6 @@
 
                 send_ajax: function() {
                     var params = ngg_importml.methods.import.params;
-                    params.nonce = ngg_importml_i18n.nonce;
                     params.attachment_ids = [ngg_importml.import_ids.pop()];
 
                     $.post(photocrati_ajax.url, params, function(data) {
